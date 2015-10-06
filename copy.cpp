@@ -15,16 +15,16 @@ namespace spencer {
 	}
 }
 
-int main()
-{
-	vector<int> x = { 1, 2, 3 };
-	list<int> y(3);
-
-	spencer::copy(x.begin(), x.end(), y.begin());
-
-	for (auto& x : y) {
-		cout << x << endl;
-	}
-
-	return 0;
-}
+//int main()
+//{
+//	vector<int> x = { 1, 2, 3 };
+//	list<int> y(3);
+//
+//	spencer::copy(x.begin(), x.end(), y.begin());
+//
+//	for (auto& x : y) {
+//		cout << x << endl;
+//	}
+//
+//	return 0;
+//}

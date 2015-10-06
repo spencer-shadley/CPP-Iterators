@@ -22,15 +22,15 @@ void g(int y) {
 	cout << "g - finished";
 }
 
-void main() {
-	cout << "main - about to call f" << endl;
-	try { f(0); }
-	catch (int e) {
-		cout << "main - caught " << e << endl;
-		cout << "main - about to call g" << endl;
-		try { g(e); }
-		catch (int g_num) { cout << "caught g exception " << g_num << endl; }
-		cout << "main - finished calling g" << endl;
-	}
-	cout << "main - finished calling f" << endl;
-}
+//void main() {
+//	cout << "main - about to call f" << endl;
+//	try { f(0); }
+//	catch (int& e) {
+//		cout << "main - caught " << e << endl;
+//		cout << "main - about to call g" << endl;
+//		try { g(e); }
+//		catch (int& g_num) { cout << "caught g exception " << g_num << endl; }
+//		cout << "main - finished calling g" << endl;
+//	}
+//	cout << "main - finished calling f" << endl;
+//}
