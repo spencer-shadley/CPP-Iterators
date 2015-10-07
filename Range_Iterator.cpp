@@ -34,9 +34,9 @@ public:
 	}
 };
 
-void main() {
-	Range_Iterator<int> r = 3;
-	int x = *r;
-	x++;
-	cout << x << endl; // x is 4
-}
+//void main() {
+//	Range_Iterator<int> r = 3;
+//	int x = *r;
+//	x++;
+//	cout << x << endl; // x is 4
+//}
