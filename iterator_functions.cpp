@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cassert>
+#include <numeric>
 using namespace std;
 
 namespace my {
@@ -58,14 +59,14 @@ namespace my {
 
 	// reverse given collection (cleanest)
 	template<typename BI>
-	void reverse(BI b, BI e) {
+	inline void reverse(BI b, BI e) {
 		while ((b != e) && (b != --e))
 			swap(*b++, *e);
 	}
 
 	// swap given values
 	template<typename T>
-	void swap(T& a, T& b) {
+	inline void swap(T& a, T& b) {
 		a ^= b;
 		b ^= a;
 		a ^= b;
@@ -73,7 +74,7 @@ namespace my {
 
 	// remove 
 	template<typename FI, typename T>
-	FI remove(FI b, FI e, const T& val) {
+	inline FI remove(FI b, FI e, const T& val) {
 		FI result;
 		while (b != e) {
 			if (*b != val) {
@@ -86,11 +87,33 @@ namespace my {
 
 	// count
 	template<typename II, typename T>
-	int count(II b, II e, const T& val) {
+	inline int count(II b, II e, const T& val) {
 		int total = 0;
 		while (b != e)
 			if (*b++ == val) total++;
 		return total;
+	}
+
+	// all_of
+	template<typename II, typename UF>
+	inline bool all_of(II b, II e, UF pred) {
+		while (b != e)
+			if (!pred(*b++)) return false;
+		return true;
+	}
+
+	// accumulate v1
+	template<typename II, typename T>
+	inline T accumulate(II b, II e, T init) {
+		while (b != e) init += *b++;
+		return init;
+	}
+
+	// accumulate v2 (function)
+	template<typename II, typename T, typename BF>
+	inline T accumulate(II b, II e, T init, BF binop) {
+		while (b != e) init = binop(init, *b++);
+		return init;
 	}
 }
 
@@ -140,4 +163,16 @@ void main() {
 	x = { 1, 1, 1, 2, 3, 4, 1 };
 	int count = my::count(x.begin(), x.end(), 1);
 	assert(count == 4);
+
+	// all_of
+	x = { 2, 4, 6, 8, 10 };
+	assert(my::all_of(x.begin(), x.end(), [](int input)->bool {return input % 2 == 0; }));
+
+	// accumluate
+	int std_acc = accumulate(x.begin(), x.end(), 2);
+	int my_acc = my::accumulate(x.begin(), x.end(), 2);
+	assert(my_acc == std_acc);
+	std_acc = accumulate(	x.begin(), x.end(), 2, [](int input1, int input2)->int {return input1*input2 + 51 % 33; });
+	my_acc = my::accumulate(x.begin(), x.end(), 2, [](int input1, int input2)->int {return input1*input2 + 51 % 33; });
+	assert(my_acc == std_acc);
 }
