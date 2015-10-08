@@ -39,25 +39,7 @@ public:
 	}
 };
 
-bool is_palindrome(string s) {
-
-	assert(&s != nullptr);
-
-	int beg = 0;
-	int end = s.size() - 1;
-
-	while (beg != end/2) {
-		if (s[beg++] != s[end--])
-			return false;
-	}
-	return true;
-}
-
 //void main() {
-//
-//	// test palindrome
-//	string s = "racessqwercar";
-//	cout << is_palindrome(s) << endl;
 //
 //	// test stack
 //	stack<int> st = stack<int>();
