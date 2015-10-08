@@ -32,6 +32,8 @@ public:
 		return v.size();
 	}
 
+	// stack shouldn't support this
+	// just testing more op overloading
 	T& operator[](int index) {
 		return v[index];
 	}
@@ -44,25 +46,31 @@ bool is_palindrome(string s) {
 	int beg = 0;
 	int end = s.size() - 1;
 
-	while (beg != end) {
+	while (beg != end/2) {
 		if (s[beg++] != s[end--])
 			return false;
 	}
 	return true;
 }
 
-void main() {
-
-	string s = "racessqwercar";
-	cout << is_palindrome(s) << endl;
-
-	stack<int> st = stack<int>();
-	st.push(3);
-	int temp = 4;
-	st.push(temp);
-	assert(st.peek() == 4);
-	assert(st.pop() == 4);
-	assert(st.pop() == 3);
-	st.push(42);
-	assert(st.pop() == 42);
-}
+//void main() {
+//
+//	// test palindrome
+//	string s = "racessqwercar";
+//	cout << is_palindrome(s) << endl;
+//
+//	// test stack
+//	stack<int> st = stack<int>();
+//	st.push(3);
+//	int temp = 4;
+//	st.push(temp);
+//	assert(st.peek() == 4);
+//	assert(st.pop() == 4);
+//	assert(st.pop() == 3);
+//	st.push(42);
+//	assert(st.pop() == 42);
+//	st.push(1);
+//	st.push(2);
+//	st.push(3);
+//	assert(st[1] == 2);
+//}

@@ -62,6 +62,36 @@ namespace my {
 		while ((b != e) && (b != --e))
 			swap(*b++, *e);
 	}
+
+	// swap given values
+	template<typename T>
+	void swap(T& a, T& b) {
+		a ^= b;
+		b ^= a;
+		a ^= b;
+	}
+
+	// remove 
+	template<typename FI, typename T>
+	FI remove(FI b, FI e, const T& val) {
+		FI result;
+		while (b != e) {
+			if (*b != val) {
+				*result = *b;
+				++result; ++b;
+			} else ++b;
+		}
+		return result;
+	}
+
+	// count
+	template<typename II, typename T>
+	int count(II b, II e, const T& val) {
+		int total = 0;
+		while (b != e)
+			if (*b++ == val) total++;
+		return total;
+	}
 }
 
 void main() {
@@ -83,8 +113,7 @@ void main() {
 
 	// test fill
 	my::fill(x.begin(), x.end(), 9);
-	for (int temp : x)
-		assert(temp == 9);
+	for (int temp : x) assert(temp == 9);
 
 	// test reverse
 	x = { 1, 2, 3 };
@@ -92,4 +121,23 @@ void main() {
 	my::reverse_no_swap(y.begin(), y.end());
 	my::reverse(y.begin(), y.end());
 	//assert(equal(x.begin(), x.end(), y.begin()));
+
+	// test swap
+	int i = 6;
+	int j = 9;
+	my::swap(i, j);
+	assert(j == 6 && i == 9);
+
+	// TODO: remove
+	/*x = { 1, 2, 3, 4, 2, 5, 2, 6 };
+	y = { 1, 3, 4, 5, 6 };
+	my::remove(x.begin(), x.end(), 2);*/
+	//for (int i : x)
+		//cout << i << endl;
+	//assert(equal(x.begin(), x.end(), y.begin()));
+
+	// count
+	x = { 1, 1, 1, 2, 3, 4, 1 };
+	int count = my::count(x.begin(), x.end(), 1);
+	assert(count == 4);
 }
